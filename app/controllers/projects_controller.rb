@@ -8,8 +8,9 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!, :only => [:show]
 
   def index
-    @projects = Project.all
+    @projects = Project.for(current_user).all
   end
+
   def new
     @project = Project.new
   end
@@ -50,12 +51,8 @@ class ProjectsController < ApplicationController
 private
 
   def find_project
-    @project = if current_user.admin?
-      Project.find(params[:id])
-    else
-      Project.readable_by(current_user).find(params[:id])
-    end
-rescue ActiveRecord::RecordNotFound
+    @project = Project.for(current_user).find(params[:id])
+  rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The project you were looking" +
         " for could not be found."
     redirect_to projects_path
