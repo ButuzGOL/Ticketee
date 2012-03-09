@@ -35,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="user.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/user.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.22569445">
+            <state line="10" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -80,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tickets_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="tickets_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/tickets_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="5" selection-start="1509" selection-end="1509" vertical-scroll-proportion="0.0">
+            <state line="70" column="0" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.9548611">
               <folding />
             </state>
           </provider>
@@ -138,10 +138,10 @@
         <option value="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/tickets_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/Ability.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/tickets_controller.rb" />
       </list>
     </option>
   </component>
@@ -790,13 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/tickets_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="5" selection-start="1509" selection-end="1509" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="12" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
@@ -813,7 +806,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.22569445">
+        <state line="10" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/tickets_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="0" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.9548611">
           <folding />
         </state>
       </provider>
