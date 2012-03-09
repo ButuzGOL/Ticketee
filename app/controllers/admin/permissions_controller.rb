@@ -1,5 +1,6 @@
 class Admin::PermissionsController < Admin::BaseController
   before_filter :find_user
+
   def index
     @ability = Ability.new(@user)
     @projects = Project.all
@@ -20,6 +21,7 @@ class Admin::PermissionsController < Admin::BaseController
   end
 
   private
+
   def find_user
     @user = User.find(params[:user_id])
   end
