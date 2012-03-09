@@ -1,4 +1,4 @@
-class Admin::UsersController < BaseController
+class Admin::UsersController < Admin::BaseController
   before_filter :find_user, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -6,6 +6,10 @@ class Admin::UsersController < BaseController
   end
 
   def new
+    @user = User.new
+  end
+
+  def create
     @user = User.new(params[:user])
     set_admin
     if @user.save
