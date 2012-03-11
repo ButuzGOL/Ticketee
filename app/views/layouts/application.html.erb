@@ -4,6 +4,14 @@
   <title>Ticketee</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <style>
+    <% for state in @states %>
+    .state_<%= state.name.parameterize %> {
+      background: <%= state.background %>;
+      color: <%= state.color %>;
+    }
+    <% end %>
+  </style>
   <%= csrf_meta_tags %>
   <title>
     <% if content_for?(:title) %>
