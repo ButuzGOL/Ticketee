@@ -6,6 +6,8 @@
     <%= f.text_area :text %>
   </p>
 
+  <%= render "tags/form" %>
+
   <% authorized?(:"change states", @project) do %>
     <p>
       <%= f.label :state_id %>

@@ -207,4 +207,13 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  config.omniauth :twitter,
+                  '4A2I3KARYw2RpgZGoXQpw',
+                  'zZ5UEMmK5LZwOiq3XhesntmadJMOgSMyb3nV4kFZlM'
+
+  config.omniauth :github,
+                  '001c27926c9d1576b1a1',
+                  'a42129f44452355fb4eb059210ce4f0e49cb7eab'
+
 end

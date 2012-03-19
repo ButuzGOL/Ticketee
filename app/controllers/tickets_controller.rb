@@ -1,13 +1,19 @@
 class TicketsController < ApplicationController
   before_filter :find_project
-  before_filter :find_ticket, :only => [:show,
-                                        :edit,
-                                        :update,
-                                        :destroy]
+  before_filter :find_ticket,
+                :only => [:show,
+                          :edit,
+                          :update,
+                          :destroy,
+                          :watch]
+
   before_filter :authenticate_user!
   before_filter :authorize_create!, :only => [:new, :create]
   before_filter :authorize_update!, :only => [:edit, :update]
   before_filter :authorize_delete!, :only => :destroy
+  before_filter :authorize_show!, :only => :show
+
+  before_filter cache_sweeper :tickets_sweeper, :only => [:create, :update, :destroy]
 
   def new
     @ticket = @project.tickets.build
@@ -17,6 +23,9 @@ class TicketsController < ApplicationController
   def create
     @ticket = @project.tickets.build(params[:ticket].merge!(:user => current_user))
     if @ticket.save
+      if can?(:tag, @project) || current_user.admin?
+        @ticket.tag!(params[:tags])
+      end
       flash[:notice] = "Ticket has been created."
       redirect_to [@project, @ticket]
     else
@@ -28,6 +37,8 @@ class TicketsController < ApplicationController
   def show
     @comment = @ticket.comments.build
     @states = State.all
+    fresh_when :last_modified => @ticket.updated_at,
+               :etag => @ticket.to_s + current_user.id.to_s
   end
 
   def edit
@@ -49,6 +60,23 @@ class TicketsController < ApplicationController
     end
   end
 
+  def search
+    @tickets = @project.tickets.search(params[:search])
+    render "projects/show"
+  end
+
+  def watch
+    if @ticket.watchers.exists?(current_user)
+      @ticket.watchers -= [current_user]
+      flash[:notice] = "You are no longer watching this ticket."
+    else
+      @ticket.watchers << current_user
+      flash[:notice] = "You are now watching this ticket."
+    end
+
+    redirect_to project_ticket_path(@ticket.project, @ticket)
+  end
+
   private
 
   def find_project
@@ -57,6 +85,13 @@ class TicketsController < ApplicationController
 
   def find_ticket
     @ticket = @project.tickets.find(params[:id])
+  end
+
+  def authorize_show!
+    if !current_user.admin? && cannot?(:"show tickets", @project)
+      flash[:alert] = "The project you were looking for could not be found."
+      redirect_to root_path
+    end
   end
 
   def authorize_create!

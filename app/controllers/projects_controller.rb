@@ -5,8 +5,12 @@ class ProjectsController < ApplicationController
                                          :update,
                                          :destroy]
 
+  before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :authorize_admin!, :except => [:index, :show]
-  before_filter :authenticate_user!, :only => [:show]
+
+  #show :show, :cache_path => (proc do
+  #  project_path(params[:id]) + "/#{current_user.id}/#{params[:page] || 1}"
+  #end)
 
   def index
     @projects = Project.for(current_user).all
@@ -28,6 +32,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @tickets = @project.tickets.page(params[:page])
   end
 
   def edit

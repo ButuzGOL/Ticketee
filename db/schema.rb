@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311100631) do
+ActiveRecord::Schema.define(:version => 20120319063707) do
 
   create_table "assets", :force => true do |t|
     t.string   "asset_file_name"
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(:version => 20120311100631) do
     t.datetime "updated_at",        :null => false
     t.integer  "state_id"
     t.integer  "previous_state_id"
+  end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.string   "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "permissions", :force => true do |t|
@@ -66,6 +79,11 @@ ActiveRecord::Schema.define(:version => 20120311100631) do
     t.integer "ticket_id"
   end
 
+  create_table "ticket_watchers", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "ticket_id"
+  end
+
   create_table "tickets", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -96,6 +114,14 @@ ActiveRecord::Schema.define(:version => 20120311100631) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.boolean  "admin",                                 :default => false
+    t.string   "authentication_token"
+    t.integer  "request_count",                         :default => 0
+    t.string   "twitter_id"
+    t.string   "twitter_screen_name"
+    t.string   "twitter_display_name"
+    t.integer  "github_id"
+    t.string   "github_user_name"
+    t.string   "github_display_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

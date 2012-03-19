@@ -7,6 +7,8 @@ class Ticket < ActiveRecord::Base
   validates :description, :presence => true,
             :length => { :minimum => 10 }
 
+  paginates_per 50
+
   has_attached_file :asset
 
   has_many :assets
@@ -22,6 +24,22 @@ class Ticket < ActiveRecord::Base
       Tag.find_or_create_by_name(tag)
     end
     self.tags << tags
+  end
+
+  searcher do
+    label :tag, :from => :tags, :field => :name
+    label :state, :from => :state, :field => "name"
+  end
+
+  has_and_belongs_to_many :watchers, :join_table => "ticket_watchers",
+                          :class_name => "User"
+
+  after_create :creator_watches_me
+
+  private
+
+  def creator_watches_me
+    self.watchers << user
   end
 
 end

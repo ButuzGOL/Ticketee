@@ -1,15 +1,46 @@
 Ticketee::Application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      resources :projects do
+        resources :tickets
+      end
+    end
+
+    namespace :v2 do
+      resources :projects do
+        resources :tickets
+      end
+    end
+  end
+
   root :to => "projects#index"
   resources :projects do
-    resources :tickets
+    resources :tickets do
+      collection do
+        get :search
+      end
+
+      member do
+        post :watch
+      end
+
+    end
   end
   resources :tickets do
     resources :comments
+    resources :tags do
+      member do
+        delete :remove
+      end
+    end
   end
 
+  devise_for :users, :controllers => {
+      :registrations => "registrations",
+      :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
 
   get '/awaiting_confirmation',
       :to => "users#confirmation",

@@ -5,6 +5,7 @@ module SeedHelpers
     user
   end
 end
+
 RSpec.configure do |config|
   config.include SeedHelpers
 end

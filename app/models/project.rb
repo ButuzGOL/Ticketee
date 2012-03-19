@@ -12,4 +12,12 @@ class Project < ActiveRecord::Base
     user.admin? ? Project : Project.readable_by(user)
   end
 
+  def last_ticket
+    tickets.last
+  end
+
+  def title
+    name
+  end
+
 end

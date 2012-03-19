@@ -8,9 +8,16 @@ gem 'rails', '3.2.1'
 gem 'sqlite3'
 
 gem 'dynamic_form'
-gem 'devise', '~> 1.4.3'
 gem 'cancan'
 gem 'paperclip'
+gem 'searcher'
+
+gem 'devise', '1.4.2'
+gem "oa-oauth", :require => "omniauth/oauth"
+gem 'omniauth', '0.3.2'
+gem 'kaminari'
+gem "delayed_job"
+gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,6 +35,7 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.5'
+  gem 'gmail'
 end
 
 group :test do
